@@ -3,14 +3,14 @@
 require "ashby/version"
 
 module Ashby
-  @@token = nil
+  @@api_key = nil
 
-  def self.token=(token)
-    @@token = token
+  def self.api_key=(token)
+    @@api_key = token
   end
 
-  def self.token
-    @@token
+  def self.api_key
+    @@api_key
   end
 
   def self.configure
