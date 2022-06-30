@@ -1,0 +1,34 @@
+version: "3.7"
+
+volumes:
+  gem_bundle:   # Used to store the app's gem libraries...
+
+services:
+  # The test container - we'll use this as the base for the rest
+  # of the app service definitions:
+  app: &app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DEVELOPER_UID: ${UID:-1000}
+        DEVELOPER_USERNAME: ${USER:-you}
+    image: coba/ashby:development
+    volumes:
+      # Mount the app code into the app containers:
+      - .:/workspaces/ashby
+
+      # After mounting the app code, we will use volumes to store the project's
+      # gem libraries and node modules.
+
+      # In the case of the gem libraries, the "gem_bundle" volume will be
+      # initialized with the development image's installed gems. Gems can be
+      # added later during the development process without re-building the
+      # development image:
+      - gem_bundle:/usr/local/bundle
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+    stdin_open: true
+
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
+    tty: true

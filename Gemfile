@@ -1,7 +1,11 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in ashby.gemspec
-gemspec
 
-gem "rake", "~> 12.0"
-gem "rspec", "~> 3.0"
+gem "httparty"
+
+group :development do
+  gem "solargraph"
+  gem "rubocop"
+  gem "rake", "~> 12.0"
+  gem "rspec", "~> 3.0"
+end

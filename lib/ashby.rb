@@ -1,6 +1,19 @@
+# frozen_string_literal: true
+
 require "ashby/version"
 
 module Ashby
-  class Error < StandardError; end
-  # Your code goes here...
+  @@token = nil
+
+  def self.token=(token)
+    @@token = token
+  end
+
+  def self.token
+    @@token
+  end
+
+  def self.configure
+    yield self
+  end
 end
