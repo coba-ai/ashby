@@ -1,4 +1,58 @@
 RSpec.describe Ashby::Candidate do
+  let(:attributes) do
+    {
+      'id' => '152fc51a-69f1-4815-b642-2f314ed22975',
+      'name' => 'John Wick',
+      'primaryEmailAddress' => {
+        'value' => 'john@wick.com',
+        'type' => 'Personal',
+        'isPrimary' => true
+      },
+      'emailAddresses' => [
+        {
+          'value' => 'john@wick.com',
+          'type' => 'Personal',
+          'isPrimary' => true
+        }
+      ],
+      'phoneNumbers' => [
+        {
+          'value' => '1234567890',
+          'type' => 'Personal',
+          'isPrimary' => true
+        }
+      ],
+      'socialLinks' => [
+        {
+          'type' => 'LinkedIn',
+          'url' => 'https://www.linkedin.com/in/john-wick/'
+        }
+      ],
+      'tags' => [],
+      'position' => 'Software Engineer',
+      'company' => 'Acme Inc.',
+      'applicationIds' => %w[
+        a970e8c2-6c64-4e40-838c-2b676be50e7a
+      ],
+      'fileHandles' => [],
+      'customFields' => []
+    }
+  end
+
+  subject { Ashby::Candidate.new(attributes) }
+
+  it { is_expected.to respond_to(:name) }
+  it { is_expected.to respond_to(:primary_email) }
+  it { is_expected.to respond_to(:phone_numbers) }
+  it { is_expected.to respond_to(:social_links) }
+  it { is_expected.to respond_to(:tags) }
+  it { is_expected.to respond_to(:application_ids) }
+  it { is_expected.to respond_to(:file_handles) }
+  it { is_expected.to respond_to(:position) }
+  it { is_expected.to respond_to(:company) }
+  it { is_expected.to respond_to(:id) }
+  it { is_expected.to respond_to(:custom_fields) }
+
   before do
     Ashby.configure do |config|
       config.api_key = 'some-api-key'
