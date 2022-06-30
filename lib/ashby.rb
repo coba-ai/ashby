@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "ashby/version"
+require_relative "ashby/version"
 
 module Ashby
   @@api_key = nil
 
-  def self.api_key=(token)
-    @@api_key = token
+  def self.api_key=(api_key)
+    @@api_key = api_key
   end
 
   def self.api_key
@@ -17,3 +17,8 @@ module Ashby
     yield self
   end
 end
+
+require 'httparty'
+require 'base64'
+require_relative 'ashby/base'
+require_relative 'ashby/candidate'
