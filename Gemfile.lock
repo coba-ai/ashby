@@ -1,11 +1,16 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     backport (1.2.0)
     benchmark (0.2.0)
+    crack (0.4.5)
+      rexml
     diff-lcs (1.5.0)
     e2mmap (0.1.0)
+    hashdiff (1.0.1)
     httparty (0.20.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -26,6 +31,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
+    public_suffix (4.0.7)
     racc (1.6.0)
     rainbow (3.1.1)
     rake (12.3.3)
@@ -77,6 +83,10 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     unicode-display_width (2.2.0)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.7.0)
     yard (0.9.28)
       webrick (~> 1.7.0)
@@ -90,6 +100,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   rubocop
   solargraph
+  webmock
 
 BUNDLED WITH
    2.2.22
