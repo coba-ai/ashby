@@ -192,4 +192,100 @@ RSpec.describe Ashby::Candidate do
       expect(candidates.first).to be_a(Ashby::Candidate)
     end
   end
+
+  describe '.create' do
+    context 'with a name' do
+      let(:response) do
+        {
+          "success": true,
+          "results": {
+            "id": 'af1f1043-2772-44a4-92b8-0a024ecd2b95',
+            "name": 'Test Candidate',
+            "emailAddresses": [],
+            "phoneNumbers": [],
+            "socialLinks": [],
+            "tags": [],
+            "applicationIds": [],
+            "fileHandles": [],
+            "customFields": []
+          }
+        }
+      end
+
+      before do
+        stub_request(:post, 'https://api.ashbyhq.com/candidate.create')
+          .with(
+            body: '{"name":"Test Candidate"}',
+            headers: {
+              'Accept' => 'application/json',
+              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Authorization' => 'Basic Og==',
+              'Content-Type' => 'application/json',
+              'User-Agent' => 'Ruby'
+            }
+          )
+          .to_return(status: 200, body: response.to_json, headers: { 'Content-Type' => 'application/json' })
+      end
+
+      it 'returns a new candidate with only name' do
+        candidate = Ashby::Candidate.create(name: 'Test Candidate')
+
+        expect(candidate.id).to eq('af1f1043-2772-44a4-92b8-0a024ecd2b95')
+        expect(candidate.name).to eq('Test Candidate')
+      end
+    end
+
+    context 'with a name and email' do
+      let(:response) do
+        {
+          "success": true,
+          "results": {
+            "id": '1618b60d-c65c-4f88-a4b9-5ebf196ffad2',
+            "name": 'Test Candidate',
+            "primaryEmailAddress": {
+              "value": 'test@test.com',
+              "type": 'Personal',
+              "isPrimary": true
+            },
+            "emailAddresses": [
+              {
+                "value": 'test@test.com',
+                "type": 'Personal',
+                "isPrimary": true
+              }
+            ],
+            "phoneNumbers": [],
+            "socialLinks": [],
+            "tags": [],
+            "applicationIds": [],
+            "fileHandles": [],
+            "customFields": []
+          }
+        }
+      end
+
+      before do
+        stub_request(:post, 'https://api.ashbyhq.com/candidate.create')
+          .with(
+            body: '{"name":"Test Candidate","email":"test@test.com"}',
+            headers: {
+              'Accept' => 'application/json',
+              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Authorization' => 'Basic Og==',
+              'Content-Type' => 'application/json',
+              'User-Agent' => 'Ruby'
+            }
+          )
+          .to_return(status: 200, body: response.to_json, headers: { 'Content-Type' => 'application/json' })
+      end
+
+      it 'returns a new candidate with name and email' do
+        candidate = Ashby::Candidate.create(name: 'Test Candidate', email: 'test@test.com')
+
+        expect(candidate.id).to eq('1618b60d-c65c-4f88-a4b9-5ebf196ffad2')
+        expect(candidate.name).to eq('Test Candidate')
+        expect(candidate.primary_email).to eq('test@test.com')
+      end
+    end
+  end
 end

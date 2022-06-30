@@ -14,7 +14,7 @@ module Ashby
     def initialize(attributes)
       super(attributes)
       @name = attributes['name']
-      @primary_email = attributes['primaryEmailAddress']['value']
+      @primary_email = attributes['primaryEmailAddress']['value'] if attributes['primaryEmailAddress']
       @phone_numbers = attributes['phoneNumbers']
       @social_links = attributes['socialLinks']
       @tags = attributes['tags']
@@ -36,6 +36,14 @@ module Ashby
 
     def self.find(id)
       response = post('/candidate.info', body: { id: id }.to_json, headers: headers)
+
+      raise response.parse_body['error'] unless response.ok?
+
+      new(response['results'])
+    end
+
+    def self.create(attributes)
+      response = post('/candidate.create', body: attributes.to_json, headers: headers)
 
       raise response.parse_body['error'] unless response.ok?
 
