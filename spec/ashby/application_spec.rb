@@ -1,4 +1,72 @@
 RSpec.describe Ashby::Application do
+  let(:attributes) do
+    {
+      'id' => 'f6c0aebb-db86-4fcc-8815-18a701744522',
+      'createdAt' => '2022-05-20T15=>18=>48.665Z',
+      'updatedAt' => '2022-06-23T00=>32=>30.136Z',
+      'candidate' => {
+        'id' => '152fc51a-69f1-4815-b642-2f314ed22975',
+        'name' => 'John Wick',
+        'primaryEmailAddress' => {
+          'value' => 'john@wick.com',
+          'type' => 'Personal',
+          'isPrimary' => true
+        }
+      },
+      'status' => 'Active',
+      'customFields' => [],
+      'currentInterviewStage' => {
+        'id' => '8c2955af-1318-4800-9343-8828bdedd470',
+        'title' => 'First Interview',
+        'type' => 'Active',
+        'interviewPlanId' => '651e04ab-3651-459b-9a75-77a792bf7aec',
+        'orderInInterviewPlan' => 5
+      },
+      'source' => {
+        'id' => 'e2ee478c-71db-4dd5-97da-faf480071ad3',
+        'title' => 'Linkedin',
+        'isArchived' => false
+      },
+      'creditedToUser' => nil,
+      'archiveReason' => nil,
+      'job' => {
+        'id' => '968209bc-521d-4094-9bc1-fd5e56e70b87',
+        'title' => '[Acme Inc] Front-end Engineer',
+        'locationId' => 'f99fe689-2d70-4ddd-b7f6-9e65dc87b8a6',
+        'departmentId' => '4a6cd1dd-5ed2-4a6c-bb38-ee406675184f'
+      },
+      'applicationHistory' => [
+        {
+          'stageId' => 'd7783394-a800-4b9b-882a-fcaffe955b02',
+          'title' => 'Accepted for interview',
+          'enteredStageAt' => '2022-05-20T15=>18=>48.712Z',
+          'leftStageAt' => '2022-05-25T14=>18=>28.238Z'
+        },
+        {
+          'stageId' => '8c2955af-1318-4800-9343-8828bdedd470',
+          'title' => 'First Interview',
+          'enteredStageAt' => '2022-05-25T14=>18=>28.239Z',
+          'leftStageAt' => nil
+        }
+      ]
+    }
+  end
+
+  subject { Ashby::Application.new(attributes) }
+
+  it { is_expected.to respond_to(:id) }
+  it { is_expected.to respond_to(:custom_fields) }
+  it { is_expected.to respond_to(:created_at) }
+  it { is_expected.to respond_to(:updated_at) }
+  it { is_expected.to respond_to(:candidate) }
+  it { is_expected.to respond_to(:status) }
+  it { is_expected.to respond_to(:current_interview_stage) }
+  it { is_expected.to respond_to(:source) }
+  it { is_expected.to respond_to(:credited_to_user) }
+  it { is_expected.to respond_to(:archive_reason) }
+  it { is_expected.to respond_to(:job) }
+  it { is_expected.to respond_to(:history) }
+
   describe '#find' do
     let(:response) do
       {
