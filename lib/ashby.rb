@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require 'ashby/version'
+
 module Ashby
-  autoload :Base, 'ashby/base'
-  autoload :Candidate, 'ashby/candidate'
-  autoload :Interview, 'ashby/interview'
-  autoload :Interview, 'ashby/job'
-  autoload :Interview, 'ashby/application'
+  autoload :Base,        'ashby/base'
+  autoload :Candidate,   'ashby/candidate'
+  autoload :Interview,   'ashby/interview'
+  autoload :Job,         'ashby/job'
+  autoload :Application, 'ashby/application'
 
   @@api_key = nil
 
@@ -24,8 +26,3 @@ end
 
 require 'httparty'
 require 'base64'
-# require_relative 'ashby/base'
-# require_relative 'ashby/candidate'
-# require_relative 'ashby/interview'
-# require_relative 'ashby/job'
-# require_relative 'ashby/application'
