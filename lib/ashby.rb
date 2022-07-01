@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'ashby/version'
-
 module Ashby
+  autoload :Base, 'ashby/base'
+  autoload :Candidate, 'ashby/candidate'
+  autoload :Interview, 'ashby/interview'
+  autoload :Interview, 'ashby/job'
+  autoload :Interview, 'ashby/application'
+
   @@api_key = nil
 
   def self.api_key=(api_key)
@@ -20,8 +24,8 @@ end
 
 require 'httparty'
 require 'base64'
-require_relative 'ashby/base'
-require_relative 'ashby/candidate'
-require_relative 'ashby/interview'
-require_relative 'ashby/job'
-require_relative 'ashby/application'
+# require_relative 'ashby/base'
+# require_relative 'ashby/candidate'
+# require_relative 'ashby/interview'
+# require_relative 'ashby/job'
+# require_relative 'ashby/application'
