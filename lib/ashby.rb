@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'ashby/version'
-
 module Ashby
   autoload :Base,        'ashby/base'
   autoload :Candidate,   'ashby/candidate'

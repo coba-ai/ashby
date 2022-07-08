@@ -1,3 +1,4 @@
+require 'pry'
 module Ashby
   class Candidate < Ashby::Base
     attr_reader :name,
@@ -27,7 +28,7 @@ module Ashby
     def self.search(body)
       response = post('/candidate.search', body: body.to_json, headers: headers)
 
-      raise response.parse_body['error'] unless response.ok?
+      raise response.parsed_response unless response.ok?
 
       response['results'].map do |attributes|
         new(attributes)
@@ -37,7 +38,7 @@ module Ashby
     def self.find(id)
       response = post('/candidate.info', body: { id: id }.to_json, headers: headers)
 
-      raise response.parse_body['error'] unless response.ok?
+      raise response.parsed_response unless response.ok?
 
       new(response['results'])
     end
@@ -45,7 +46,7 @@ module Ashby
     def self.create(attributes)
       response = post('/candidate.create', body: attributes.to_json, headers: headers)
 
-      raise response.parse_body['error'] unless response.ok?
+      raise response.parsed_response unless response.ok?
 
       new(response['results'])
     end

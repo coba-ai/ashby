@@ -29,7 +29,7 @@ module Ashby
     def self.find(id)
       response = post('/application.info', body: { applicationId: id }.to_json, headers: headers)
 
-      raise response.parse_body['error'] unless response.ok?
+      raise response.parsed_response unless response.ok?
 
       new(response['results'])
     end
