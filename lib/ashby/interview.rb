@@ -1,5 +1,7 @@
 module Ashby
   class Interview < Ashby::Base
+    attr_reader :title
+
     def initialize(attributes)
       super(attributes)
       @title = attributes['title']
