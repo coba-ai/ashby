@@ -1,4 +1,3 @@
-require 'pry'
 module Ashby
   class Candidate < Ashby::Base
     attr_reader :name,
